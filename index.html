@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indian Flag - Tetris Edition</title>
+    <title>80th Independence Day Celebration</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -13,6 +14,7 @@
             --beat-scale: 1;
             --beat-glow: transparent;
         }
+
         body {
             margin: 0;
             min-height: 100vh;
@@ -29,16 +31,24 @@
         /* Background Additions */
         .bg-parallax {
             position: fixed;
-            top: -10%; left: -10%; width: 120%; height: 120%;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
             background: url('./wallpaper.jpg') no-repeat center center;
             background-size: cover;
             z-index: -2;
             transition: transform 0.1s ease-out;
         }
+
         .bg-darken {
             position: fixed;
-            top: -20%; left: -20%; width: 140%; height: 140%;
-            background: rgba(4, 9, 20, 0.75); /* Dark overlay for perfect contrast */
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: rgba(4, 9, 20, 0.75);
+            /* Dark overlay for perfect contrast */
             backdrop-filter: blur(8px);
             z-index: -1;
         }
@@ -46,7 +56,10 @@
         /* Start Overlay */
         .start-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(15px);
             display: flex;
@@ -56,6 +69,7 @@
             z-index: 100;
             transition: opacity 0.8s ease;
         }
+
         .start-overlay h1 {
             font-size: clamp(2.5rem, 8vw, 5rem);
             margin-bottom: 2rem;
@@ -63,6 +77,7 @@
             text-align: center;
             padding: 0 20px;
         }
+
         .start-btn {
             font-size: 1.5rem;
             padding: 20px 50px;
@@ -70,6 +85,7 @@
             border: 2px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
         }
+
         .start-btn:hover {
             background: rgba(255, 255, 255, 0.2);
             box-shadow: 0 0 50px rgba(255, 255, 255, 0.4);
@@ -83,6 +99,7 @@
             animation: fadeInDown 1s ease-out;
             z-index: 10;
         }
+
         h1 {
             font-size: clamp(1.8rem, 5vw, 3.5rem);
             margin: 0;
@@ -96,6 +113,7 @@
             filter: drop-shadow(0px 4px 15px rgba(255, 255, 255, 0.2));
             padding: 0 15px;
         }
+
         p.subtitle {
             margin: 5px 0 0 0;
             color: #dbe4f0;
@@ -105,6 +123,7 @@
             text-align: center;
             font-size: clamp(0.8rem, 2.5vw, 1rem);
         }
+
         .game-wrapper {
             position: relative;
             padding: clamp(10px, 3vw, 20px);
@@ -112,8 +131,8 @@
             border-radius: 20px;
             border: 1px solid var(--border-color);
             box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9),
-                        0 0 40px rgba(255, 255, 255, 0.1),
-                        inset 0 0 30px rgba(255, 255, 255, 0.05);
+                0 0 40px rgba(255, 255, 255, 0.1),
+                inset 0 0 30px rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(15px);
             transform-style: preserve-3d;
             transform: rotateX(8deg);
@@ -122,24 +141,28 @@
             max-width: 95vw;
             box-sizing: border-box;
         }
+
         @media (hover: hover) and (pointer: fine) {
             .game-wrapper:hover {
                 transform: rotateX(0deg);
             }
         }
+
         @media (max-width: 768px) {
             .game-wrapper {
                 transform: none !important;
             }
         }
+
         canvas {
             display: block;
             border-radius: 12px;
             background: rgba(0, 0, 0, 0.5);
-            box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8);
             max-width: 100%;
             height: auto !important;
         }
+
         .controls {
             margin-top: 2.5rem;
             display: flex;
@@ -150,6 +173,7 @@
             justify-content: center;
             padding: 0 15px;
         }
+
         button {
             background: rgba(255, 255, 255, 0.05);
             color: white;
@@ -165,29 +189,35 @@
             letter-spacing: 2px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
+
         button::before {
             content: '';
             position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
             transition: 0.6s;
         }
+
         button:hover::before {
             left: 100%;
         }
+
         button:hover {
             background: rgba(255, 255, 255, 0.1);
             border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 0 25px rgba(255,255,255,0.15);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
             transform: translateY(-3px);
         }
+
         button:active {
             transform: translateY(1px);
         }
-        
+
         .footer {
             margin-top: 1.5rem;
             font-size: 1rem;
@@ -196,6 +226,7 @@
             animation: fadeInUp 1s ease-out;
             letter-spacing: 1px;
         }
+
         .footer a {
             color: white;
             text-decoration: none;
@@ -203,21 +234,38 @@
             transition: all 0.3s ease;
             border-bottom: 1px solid transparent;
         }
+
         .footer a:hover {
             color: #FF9933;
             border-bottom: 1px solid #FF9933;
         }
 
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- Background Additions -->
@@ -235,7 +283,9 @@
 
     <div class="header">
         <h1>Celebrating Our 80th Year Of Independence</h1>
-        <i><p class="subtitle">VANDE MATARAM</p></i>
+        <i>
+            <p class="subtitle">VANDE MATARAM</p>
+        </i>
     </div>
 
     <div class="game-wrapper">
@@ -254,7 +304,7 @@
         // --- Parallax Effect ---
         if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
             document.addEventListener('mousemove', (e) => {
-                const x = (e.clientX / window.innerWidth - 0.5) * 30; 
+                const x = (e.clientX / window.innerWidth - 0.5) * 30;
                 const y = (e.clientY / window.innerHeight - 0.5) * 30;
                 document.getElementById('bgParallax').style.transform = `translate(${-x}px, ${-y}px)`;
             });
@@ -269,10 +319,10 @@
             const overlay = document.getElementById('startOverlay');
             overlay.style.opacity = '0';
             setTimeout(() => overlay.style.display = 'none', 800);
-            
+
             const audioEl = document.getElementById('bgMusic');
             audioEl.play().catch(e => console.log("Audio play prevented:", e));
-            
+
             // Because Chrome mutes local 'file://' audio when routed through the Web Audio API,
             // we will bypass the real analyzer and simulate a dynamic beat so you still get 
             // the awesome audio-reactive visuals while guaranteeing the song actually plays!
@@ -281,14 +331,14 @@
                 targetBeat = 0.5 + Math.random() * 0.5;
                 setTimeout(() => targetBeat = 0, 150); // beat duration
             }, 480); // roughly 125 BPM
-            
+
             restartAnimation();
         }
 
         function updateAudioData() {
             // Simulated beat smoothing
             beatValue += (targetBeat - beatValue) * 0.3;
-            
+
             // Update CSS variables for UI pulsing
             const scale = isComplete ? 1 + beatValue * 0.05 : 1 + beatValue * 0.015;
             const glow = beatValue * 0.4;
@@ -303,8 +353,8 @@
         const COLS = 36;
         const ROWS = 24;
         const BLOCK_SIZE = 15;
-        const WIDTH = COLS * BLOCK_SIZE; 
-        const HEIGHT = ROWS * BLOCK_SIZE; 
+        const WIDTH = COLS * BLOCK_SIZE;
+        const HEIGHT = ROWS * BLOCK_SIZE;
 
         const dpr = window.devicePixelRatio || 1;
         canvas.width = WIDTH * dpr;
@@ -319,15 +369,15 @@
         const COLOR_NAVY = "#000080";
 
         const PIECE_TEMPLATES = [
-            [[1,1,1,1]], [[1,1],[1,1]], [[0,1,0],[1,1,1]], 
-            [[1,1,0],[0,1,1]], [[0,1,1],[1,1,0]], [[1,0,0],[1,1,1]], [[0,0,1],[1,1,1]]
+            [[1, 1, 1, 1]], [[1, 1], [1, 1]], [[0, 1, 0], [1, 1, 1]],
+            [[1, 1, 0], [0, 1, 1]], [[0, 1, 1], [1, 1, 0]], [[1, 0, 0], [1, 1, 1]], [[0, 0, 1], [1, 1, 1]]
         ];
         const TETRIS_COLORS = ['#00FFFF', '#FFFF00', '#800080', '#00FF00', '#FF0000', '#0000FF', '#FFA500'];
 
         function rotateMatrix(matrix) {
             const rows = matrix.length;
             const cols = matrix[0].length;
-            let result = Array.from({length: cols}, () => Array(rows).fill(0));
+            let result = Array.from({ length: cols }, () => Array(rows).fill(0));
             for (let r = 0; r < rows; r++) {
                 for (let c = 0; c < cols; c++) {
                     result[c][rows - 1 - r] = matrix[r][c];
@@ -379,7 +429,7 @@
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
-                this.vy += 0.08; 
+                this.vy += 0.08;
                 this.life -= this.decay;
             }
             draw(ctx) {
@@ -408,14 +458,14 @@
                 this.trail = [];
             }
             update() {
-                this.trail.push({x: this.x, y: this.y, life: 1.0});
-                for(let t of this.trail) t.life -= 0.15;
+                this.trail.push({ x: this.x, y: this.y, life: 1.0 });
+                for (let t of this.trail) t.life -= 0.15;
                 this.trail = this.trail.filter(t => t.life > 0);
-                
+
                 this.x += this.vx;
                 this.y += this.vy;
                 this.vy += 0.12; // gravity
-                
+
                 if (this.vy >= -1) {
                     this.exploded = true;
                     for (let i = 0; i < 40; i++) {
@@ -428,13 +478,13 @@
                 ctx.shadowBlur = 15;
                 ctx.shadowColor = this.color;
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, 2.5, 0, Math.PI*2);
+                ctx.arc(this.x, this.y, 2.5, 0, Math.PI * 2);
                 ctx.fill();
-                
-                for(let t of this.trail) {
+
+                for (let t of this.trail) {
                     ctx.globalAlpha = t.life;
                     ctx.beginPath();
-                    ctx.arc(t.x, t.y, 1.5, 0, Math.PI*2);
+                    ctx.arc(t.x, t.y, 1.5, 0, Math.PI * 2);
                     ctx.fill();
                 }
                 ctx.globalAlpha = 1.0;
@@ -445,7 +495,7 @@
         // --- Core Game Loop ---
         function generatePlan() {
             buildPlan = [];
-            let simBoard = Array.from({length: ROWS}, () => Array(COLS).fill(false));
+            let simBoard = Array.from({ length: ROWS }, () => Array(COLS).fill(false));
 
             for (let r = ROWS - 1; r >= 0; r--) {
                 for (let c = 0; c < COLS; c++) {
@@ -457,7 +507,7 @@
                     for (const piece of shuffled) {
                         const ph = piece.matrix.length;
                         const pw = piece.matrix[0].length;
-                        
+
                         if (piece.matrix[ph - 1][0] === 0) continue;
                         const targetY = r - ph + 1;
 
@@ -513,11 +563,11 @@
                         let br = p.targetY + r;
                         let bc = p.targetX + c;
                         board[br][bc] = getFlagColor(br, bc);
-                        
-                        for(let i = 0; i < 4; i++) {
+
+                        for (let i = 0; i < 4; i++) {
                             particles.push(new Particle(
-                                (bc + 0.5) * BLOCK_SIZE, 
-                                (br + 0.5) * BLOCK_SIZE, 
+                                (bc + 0.5) * BLOCK_SIZE,
+                                (br + 0.5) * BLOCK_SIZE,
                                 board[br][bc]
                             ));
                         }
@@ -529,7 +579,7 @@
         function update() {
             frameCount++;
             updateAudioData();
-            
+
             // Spawn pieces more slowly to match song duration (1 piece every 6 frames)
             if (frameCount % 6 === 0 && buildPlan.length > 0) {
                 let np = buildPlan.shift();
@@ -539,7 +589,7 @@
                     y: -np.matrix.length - Math.random() * 8 - 2
                 });
             }
-            
+
             if (buildPlan.length === 0 && activePieces.length === 0 && !isComplete) {
                 isComplete = true;
                 const cx = (COLS * BLOCK_SIZE) / 2;
@@ -549,12 +599,12 @@
                     particles.push(new Particle(cx, cy, COLOR_WHITE));
                 }
             }
-            
+
             for (let i = activePieces.length - 1; i >= 0; i--) {
                 let p = activePieces[i];
                 let dx = p.targetX - p.x;
                 p.x += dx * 0.15; // smoother, slower horizontal slide
-                
+
                 if (Math.abs(dx) > 0.5) {
                     p.y += 0.15; // slower hover downwards
                 } else {
@@ -567,7 +617,7 @@
                     }
                 }
             }
-            
+
             for (let i = particles.length - 1; i >= 0; i--) {
                 particles[i].update();
                 if (particles[i].life <= 0) particles.splice(i, 1);
@@ -596,18 +646,18 @@
             } else {
                 ctx.shadowBlur = 0;
             }
-            
+
             const gap = 1;
             const size = BLOCK_SIZE - gap * 2;
             const rx = x + gap;
             const ry = y + gap;
-            
+
             ctx.fillRect(rx, ry, size, size);
-            
+
             ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
             ctx.fillRect(rx, ry, size, 2);
             ctx.fillRect(rx, ry, 2, size);
-            
+
             ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
             ctx.fillRect(rx, ry + size - 2, size, 2);
             ctx.fillRect(rx + size - 2, ry, 2, size);
@@ -615,67 +665,67 @@
 
         function drawChakra() {
             if (!isComplete) return;
-            
+
             chakraProgress += 0.015;
             const progress = Math.min(chakraProgress, 1.0);
-            const rotation = chakraProgress * Math.PI * 0.25; 
-            
+            const rotation = chakraProgress * Math.PI * 0.25;
+
             const cx = WIDTH / 2;
             const cy = HEIGHT / 2;
-            
+
             // Chakra pulses and grows with the audio beat!
             const audioScale = 1 + (beatValue * 0.25);
-            const maxRadius = 45 * audioScale; 
-            
-            const easeProgress = 1 - Math.pow(1 - progress, 4); 
+            const maxRadius = 45 * audioScale;
+
+            const easeProgress = 1 - Math.pow(1 - progress, 4);
             const radius = maxRadius * easeProgress;
-            
+
             ctx.save();
             ctx.translate(cx, cy);
             ctx.rotate(rotation);
-            
+
             ctx.shadowBlur = 25;
             ctx.shadowColor = 'rgba(0, 0, 128, 0.8)';
             ctx.strokeStyle = COLOR_NAVY;
             ctx.fillStyle = COLOR_NAVY;
-            
+
             ctx.globalAlpha = easeProgress;
-            
+
             // Outer ring
             ctx.lineWidth = 4;
             ctx.beginPath();
             ctx.arc(0, 0, radius, 0, Math.PI * 2);
             ctx.stroke();
-            
+
             // Inner hub
             ctx.beginPath();
             ctx.arc(0, 0, Math.max(radius * 0.15, 0), 0, Math.PI * 2);
             ctx.fill();
-            
+
             // 24 Spokes
             ctx.lineWidth = 1.5;
-            for(let i = 0; i < 24; i++) {
+            for (let i = 0; i < 24; i++) {
                 const angle = (i * Math.PI * 2) / 24;
                 ctx.beginPath();
                 ctx.moveTo(0, 0);
                 ctx.lineTo(Math.cos(angle) * radius, Math.sin(angle) * radius);
                 ctx.stroke();
             }
-            
+
             ctx.restore();
         }
 
         function draw() {
             ctx.clearRect(0, 0, WIDTH, HEIGHT);
-            
+
             ctx.strokeStyle = 'rgba(255, 255, 255, 0.025)';
             ctx.lineWidth = 1;
             ctx.beginPath();
-            for(let r = 0; r <= ROWS; r++) {
+            for (let r = 0; r <= ROWS; r++) {
                 ctx.moveTo(0, r * BLOCK_SIZE);
                 ctx.lineTo(WIDTH, r * BLOCK_SIZE);
             }
-            for(let c = 0; c <= COLS; c++) {
+            for (let c = 0; c <= COLS; c++) {
                 ctx.moveTo(c * BLOCK_SIZE, 0);
                 ctx.lineTo(c * BLOCK_SIZE, HEIGHT);
             }
@@ -688,7 +738,7 @@
                     }
                 }
             }
-            
+
             for (let p of activePieces) {
                 for (let r = 0; r < p.matrix.length; r++) {
                     for (let c = 0; c < p.matrix[0].length; c++) {
@@ -696,21 +746,21 @@
                             let bx = (p.x + c) * BLOCK_SIZE;
                             let by = (p.y + r) * BLOCK_SIZE;
                             drawBlock(bx, by, p.color, true);
-                            
-                            if (r === 0 || !p.matrix[r-1][c]) {
+
+                            if (r === 0 || !p.matrix[r - 1][c]) {
                                 ctx.fillStyle = p.color;
                                 ctx.shadowBlur = 0;
                                 ctx.globalAlpha = 0.3;
                                 ctx.fillRect(bx + 1, by - BLOCK_SIZE + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2);
                                 ctx.globalAlpha = 0.1;
-                                ctx.fillRect(bx + 1, by - BLOCK_SIZE*1.5 + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2);
+                                ctx.fillRect(bx + 1, by - BLOCK_SIZE * 1.5 + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2);
                                 ctx.globalAlpha = 1.0;
                             }
                         }
                     }
                 }
             }
-            
+
             for (let r of rockets) r.draw(ctx);
             for (let p of particles) p.draw(ctx);
             drawChakra();
@@ -727,7 +777,7 @@
         }
 
         function restartAnimation() {
-            board = Array.from({length: ROWS}, () => Array(COLS).fill(null));
+            board = Array.from({ length: ROWS }, () => Array(COLS).fill(null));
             activePieces = [];
             particles = [];
             rockets = [];
@@ -739,4 +789,5 @@
         }
     </script>
 </body>
+
 </html>
