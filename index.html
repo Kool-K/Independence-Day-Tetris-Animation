@@ -29,7 +29,7 @@
         /* Background Additions */
         .bg-parallax {
             position: fixed;
-            top: -5%; left: -5%; width: 110%; height: 110%;
+            top: -10%; left: -10%; width: 120%; height: 120%;
             background: url('./wallpaper.jpg') no-repeat center center;
             background-size: cover;
             z-index: -2;
@@ -37,7 +37,7 @@
         }
         .bg-darken {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: -20%; left: -20%; width: 140%; height: 140%;
             background: rgba(4, 9, 20, 0.75); /* Dark overlay for perfect contrast */
             backdrop-filter: blur(8px);
             z-index: -1;
@@ -122,8 +122,15 @@
             max-width: 95vw;
             box-sizing: border-box;
         }
-        .game-wrapper:hover {
-            transform: rotateX(0deg);
+        @media (hover: hover) and (pointer: fine) {
+            .game-wrapper:hover {
+                transform: rotateX(0deg);
+            }
+        }
+        @media (max-width: 768px) {
+            .game-wrapper {
+                transform: none !important;
+            }
         }
         canvas {
             display: block;
@@ -131,7 +138,7 @@
             background: rgba(0, 0, 0, 0.5);
             box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
             max-width: 100%;
-            height: auto;
+            height: auto !important;
         }
         .controls {
             margin-top: 2.5rem;
@@ -245,11 +252,13 @@
 
     <script>
         // --- Parallax Effect ---
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 30; 
-            const y = (e.clientY / window.innerHeight - 0.5) * 30;
-            document.getElementById('bgParallax').style.transform = `translate(${-x}px, ${-y}px)`;
-        });
+        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+            document.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 30; 
+                const y = (e.clientY / window.innerHeight - 0.5) * 30;
+                document.getElementById('bgParallax').style.transform = `translate(${-x}px, ${-y}px)`;
+            });
+        }
 
         // --- Audio & Visualizer ---
         let audioCtx, analyser, dataArray;
